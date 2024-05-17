@@ -4,18 +4,29 @@ students = [
   {"name": "Daniel", "hometown": "Troy", "favorite_food": "hamburgers"}
 ]
 
+
+def list_names(students) -> [str, str]:
+    print('Student names:')
+    for i, name in enumerate(students):
+        print(f'{i + 1}: {name['name']}')
+
+
+def get_new_student(students) -> [str, str]:
+    new_name = str(input('Please input a name for the new student: >> ')).capitalize()
+    new_hometown = str(input('Next please input their hometown: >> ')).capitalize()
+    new_food = str(input('Last please input their favorite food: >> ')).lower()
+    return {"name": new_name, "hometown": new_hometown, "favorite_food": new_food}
+
+
 while True:
     print()
     action = str(input('Please select which action you\'d like to take: add, view or quit: >> '))
     if 'view' in action:
-        def list_names(students):
-            print('Student names:')
-            for i, name in enumerate(students):
-                print(f'{i + 1}: {name['name']}')
         list_names(students)
         student_number = int(input(f'Which student would you like to learn about? Enter a number: >> '))
         print()
         student_name = students[student_number - 1]
+
         if student_number < 0 or student_number > len(students):
             print(f'Number {student_number} is not a valid student number, please try again.')
         else:
@@ -30,11 +41,6 @@ while True:
             print('That category does not exist. Please try again.')
 
     elif 'add' in action:
-        def get_new_student(students) -> [str, str]:
-            new_name = str(input('Please input a name for the new student: >> ')).capitalize()
-            new_hometown = str(input('Next please input their hometown: >> ')).capitalize()
-            new_food = str(input('Last please input their favorite food: >> ')).lower()
-            return {"name": new_name, "hometown": new_hometown, "favorite_food": new_food}
         students.append(get_new_student(students))
 
     elif 'quit' in action:
